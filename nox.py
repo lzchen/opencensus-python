@@ -60,7 +60,7 @@ def unit(session, py):
     """Run the unit test suite."""
 
     # Run unit tests against all supported versions of Python.
-    session.interpreter = 'python{}'.format(py)
+    # session.interpreter = 'python{}'.format(py)
 
     # Install test dependencies.
     _install_test_dependencies(session)
