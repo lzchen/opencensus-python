@@ -16,6 +16,7 @@ from __future__ import absolute_import
 
 import nox
 import os
+import sys
 
 
 def _install_dev_packages(session):
@@ -55,8 +56,8 @@ def _install_test_dependencies(session):
 
 
 @nox.session
-@nox.parametrize('py', ['2.7', '3.4', '3.5', '3.6'])
-def unit(session, py):
+# @nox.parametrize('py', ['2.7', '3.4', '3.5', '3.6'])
+def unit(session):
     """Run the unit test suite."""
 
     # Run unit tests against all supported versions of Python.
@@ -87,8 +88,8 @@ def unit(session, py):
 
 
 @nox.session
-@nox.parametrize('py', ['2.7', '3.6'])
-def system(session, py):
+# @nox.parametrize('py', ['2.7', '3.6'])
+def system(session):
     """Run the system test suite."""
 
     # Sanity check: Only run system tests if the environment variable is set.
