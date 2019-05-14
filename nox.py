@@ -56,12 +56,12 @@ def _install_test_dependencies(session):
 
 
 @nox.session
-# @nox.parametrize('py', ['2.7', '3.4', '3.5', '3.6'])
-def unit(session):
+@nox.parametrize('py', ['2.7', '3.4', '3.5', '3.6'])
+def unit(session, py):
     """Run the unit test suite."""
 
     # Run unit tests against all supported versions of Python.
-    # session.interpreter = 'python{}'.format(py)
+    session.interpreter = 'python{}'.format(py)
 
     # Install test dependencies.
     _install_test_dependencies(session)
@@ -87,8 +87,8 @@ def unit(session):
     )
 
 
-@nox.session
-# @nox.parametrize('py', ['2.7', '3.6'])
+# @nox.session
+@nox.parametrize('py', ['2.7', '3.6'])
 def system(session):
     """Run the system test suite."""
 
@@ -97,7 +97,7 @@ def system(session):
         session.skip('Credentials must be set via environment variable.')
 
     # # Run the system tests against latest Python 2 and Python 3 only.
-    # session.interpreter = 'python{}'.format(py)
+    session.interpreter = 'python{}'.format(py)
 
     # Set the virtualenv dirname.
     session.virtualenv_dirname = 'sys-' + py
@@ -117,13 +117,13 @@ def system(session):
     )
 
 
-@nox.session
+# @nox.session
 def lint(session):
     """Run flake8.
     Returns a failure if flake8 finds linting errors or sufficiently
     serious code quality issues.
     """
-    # session.interpreter = 'python3.6'
+    session.interpreter = 'python3.6'
     session.install('flake8')
 
     # Install dev packages.
@@ -139,33 +139,33 @@ def lint(session):
     )
 
 
-@nox.session
+# @nox.session
 def lint_setup_py(session):
     """Verify that setup.py is valid (including RST check)."""
-    # session.interpreter = 'python3.6'
+    session.interpreter = 'python3.6'
     session.install('docutils', 'pygments')
     session.run(
         'python', 'setup.py', 'check', '--restructuredtext', '--strict')
 
 
-@nox.session
+# @nox.session
 def cover(session):
     """Run the final coverage report.
     This outputs the coverage report aggregating coverage from the unit
     test runs (not system test runs), and then erases coverage data.
     """
-    # session.interpreter = 'python3.6'
+    session.interpreter = 'python3.6'
     session.install('coverage', 'pytest-cov')
     session.run('coverage', 'report', '--show-missing', '--fail-under=100')
     session.run('coverage', 'erase')
 
 
-@nox.session
+# @nox.session
 def docs(session):
     """Build the docs."""
 
     # Build docs against the latest version of Python, because we can.
-    # session.interpreter = 'python3.6'
+    session.interpreter = 'python3.6'
 
     # Set the virtualenv dirname.
     session.virtualenv_dirname = 'docs'
