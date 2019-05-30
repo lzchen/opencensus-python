@@ -20,7 +20,7 @@ except ImportError:
 
 import threading
 
-__all__ = ['RUNTIME_CONTEXT']
+__all__ = ['RuntimeContext']
 
 
 class _RuntimeContext(object):
@@ -57,7 +57,7 @@ class _RuntimeContext(object):
         return dict((n, self._slots[n].get()) for n in self._slots.keys())
 
     def __repr__(self):
-        return '{}({})'.format(type(self).__name__, self.snapshot())
+        return ('{}({})'.format(type(self).__name__, self.snapshot()))
 
     def __getattr__(self, name):
         if name not in self._slots:
@@ -171,8 +171,7 @@ class _AsyncRuntimeContext(_RuntimeContext):
             cls._slots[name] = slot
             return slot
 
-RUNTIME_CONTEXT = None
+
+RuntimeContext = _ThreadLocalRuntimeContext()
 if contextvars:
-    RUNTIME_CONTEXT = _AsyncRuntimeContext()
-else:
-    RUNTIME_CONTEXT = _ThreadLocalRuntimeContext()
+    RuntimeContext = _AsyncRuntimeContext()
