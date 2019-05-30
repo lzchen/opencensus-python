@@ -34,7 +34,7 @@ class Span(object):
     async def __aenter__(self):
         RuntimeContext.current_span = self
 
-    async def __aexit__(self, exc_type, exc, tb):
+    async def __aexit__(self, exc_type, exc, traceback):
         RuntimeContext.current_span = self.parent
 
 

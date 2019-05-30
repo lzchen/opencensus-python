@@ -18,11 +18,11 @@ import threading
 from opencensus.common.runtime_context import RuntimeContext
 
 RuntimeContext.register_slot('operation_id', '<empty>')
-_console_lock = threading.Lock()
+CONSOLE_LOCK = threading.Lock()
 
 
 def println(msg):
-    with _console_lock:
+    with CONSOLE_LOCK:
         print(msg)
 
 
@@ -32,8 +32,7 @@ def work(name):
     time.sleep(0.01)
     println('Exiting worker[{}]: {}'.format(name, RuntimeContext))
 
-
-if __name__ == "__main__":
+def main():
     println('Main thread: {}'.format(RuntimeContext))
     RuntimeContext.operation_id = 'main'
     pool = ThreadPool(2)  # create a thread pool with 2 threads
@@ -46,4 +45,7 @@ if __name__ == "__main__":
     ])
     pool.close()
     pool.join()
-    println('Main thread: {}'.format(RuntimeContext))
+    println('Main thread: {}'.format(RuntimeContext))   
+
+if __name__ == "__main__":
+    main()

@@ -16,7 +16,7 @@ import asyncio
 
 from opencensus.common.runtime_context import RuntimeContext
 
-RuntimeContext.register_slot('correlation_context', lambda: dict())
+RuntimeContext.register_slot('correlation_context', dict())
 
 
 async def hello(name):
@@ -24,10 +24,10 @@ async def hello(name):
     correlation_context['name'] = name
     RuntimeContext.correlation_context = correlation_context
 
-    for i in range(3):
+    for count in range(3):
         print('Hello {} {} {}'.format(
             name,
-            i,
+            count,
             RuntimeContext,
         ))
         await asyncio.sleep(0.1)

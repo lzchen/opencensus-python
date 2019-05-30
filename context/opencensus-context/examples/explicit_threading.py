@@ -23,8 +23,7 @@ def work(name):
     RuntimeContext.operation_id = name
     print('Exiting worker:', RuntimeContext)
 
-
-if __name__ == '__main__':
+def main():
     print('Main thread:', RuntimeContext)
     RuntimeContext.operation_id = 'main'
 
@@ -46,3 +45,6 @@ if __name__ == '__main__':
     thread.join()
 
     print('Main thread:', RuntimeContext)
+
+if __name__ == '__main__':
+    main()

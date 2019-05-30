@@ -23,12 +23,12 @@ class Span(object):
         self.parent = RuntimeContext.current_span
 
     def __repr__(self):
-        return ('{}({})'.format(type(self).__name__, self.name))
+        return '{}({})'.format(type(self).__name__, self.name)
 
     def __enter__(self):
         RuntimeContext.current_span = self
 
-    def __exit__(self, type, value, traceback):
+    def __exit__(self, exc_type, exc, traceback):
         RuntimeContext.current_span = self.parent
 
     def start(self):
@@ -37,8 +37,7 @@ class Span(object):
     def end(self):
         RuntimeContext.current_span = self.parent
 
-
-if __name__ == '__main__':
+def main():
     print(RuntimeContext)
     with Span('foo'):
         print(RuntimeContext)
@@ -54,3 +53,7 @@ if __name__ == '__main__':
     print(RuntimeContext)
     span.end()
     print(RuntimeContext)
+
+
+if __name__ == '__main__':
+    main()
