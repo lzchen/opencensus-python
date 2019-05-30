@@ -37,6 +37,7 @@ class Span(object):
     def end(self):
         RuntimeContext.current_span = self.parent
 
+
 def main():
     print(RuntimeContext)
     with Span('foo'):

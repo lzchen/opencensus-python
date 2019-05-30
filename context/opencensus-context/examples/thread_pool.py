@@ -32,6 +32,7 @@ def work(name):
     time.sleep(0.01)
     println('Exiting worker[{}]: {}'.format(name, RuntimeContext))
 
+
 def main():
     println('Main thread: {}'.format(RuntimeContext))
     RuntimeContext.operation_id = 'main'
@@ -45,7 +46,8 @@ def main():
     ])
     pool.close()
     pool.join()
-    println('Main thread: {}'.format(RuntimeContext))   
+    println('Main thread: {}'.format(RuntimeContext))
+
 
 if __name__ == "__main__":
     main()
