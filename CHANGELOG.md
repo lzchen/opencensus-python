@@ -1,6 +1,28 @@
 # Changelog
 
 ## Unreleased
+- Updated `django`, `flask`, `httplib`, `requests` and `pyramid` modules
+  ([#755](https://github.com/census-instrumentation/opencensus-python/pull/755))
+- Added `http code` to `grpc code` status code mapping on `utils`
+  ([#746](https://github.com/census-instrumentation/opencensus-python/pull/746))
+- Updated `requests` module
+  ([#771](https://github.com/census-instrumentation/opencensus-python/pull/771))
+
+## 0.7.2
+Released 2019-08-16
+
+- Fix GCP resource loading for certain environments
+  ([#761](https://github.com/census-instrumentation/opencensus-python/pull/761))
+
+## 0.7.1
+Released 2019-08-05
+
+- Added `set_status` to `span`
+  ([#738](https://github.com/census-instrumentation/opencensus-python/pull/738))
+- Update released stackdriver exporter version
+
+## 0.7.0
+Released 2019-07-31
 
 ## 0.7.2
 Released 2019-08-16
