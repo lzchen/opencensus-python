@@ -24,7 +24,7 @@ from opencensus.trace import execution_context
 
 _DEFAULT_GRACE_PERIOD = 5.0  # Seconds
 _DEFAULT_MAX_BATCH_SIZE = 600
-_DEFAULT_WAIT_PERIOD = 60.0  # Seconds
+_DEFAULT_WAIT_PERIOD = 5 # Seconds
 _WORKER_THREAD_NAME = 'opencensus.common.Worker'
 _WORKER_TERMINATOR = object()
 
