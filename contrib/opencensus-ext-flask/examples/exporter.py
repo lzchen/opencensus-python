@@ -7,7 +7,7 @@ application = Flask(__name__)
 
 exporter = AzureExporter(instrumentation_key='your-instrumentation-key-here')
 sampler=ProbabilitySampler(1.0)
-middleware = FlaskMiddleware(application)
+middleware = FlaskMiddleware(application, sampler=sampler, exporter=exporter)
 
 @application.route("/")
 def hello():
