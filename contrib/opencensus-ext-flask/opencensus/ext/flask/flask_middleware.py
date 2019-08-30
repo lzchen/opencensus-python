@@ -103,6 +103,7 @@ class FlaskMiddleware(object):
                 print_exporter.PrintExporter()
             if isinstance(self.exporter, six.string_types):
                 self.exporter = configuration.load(self.exporter)
+        print(self.exporter)
 
         if self.propagator is None:
             self.propagator = settings.get('PROPAGATOR', None) or \
@@ -132,6 +133,7 @@ class FlaskMiddleware(object):
             return
 
         try:
+            print("before")
             span_context = self.propagator.from_headers(flask.request.headers)
 
             tracer = tracer_module.Tracer(
