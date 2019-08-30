@@ -1,9 +1,8 @@
-from flask import Flask
-from opencensus.ext.flask.flask_middleware import FlaskMiddleware
-from opencensus.ext.azure.trace_exporter import AzureExporter
-from opencensus.trace.samplers import ProbabilitySampler
 import logging
+
+from flask import Flask
 from opencensus.ext.azure.log_exporter import AzureLogHandler
+from opencensus.ext.flask.flask_middleware import FlaskMiddleware
 
 application = Flask(__name__)
 
@@ -11,8 +10,6 @@ logger = logging.getLogger(__name__)
 handler = AzureLogHandler(instrumentation_key='70c241c9-206e-4811-82b4-2bc8a52170b9')
 logger.addHandler(handler)
 
-# exporter = AzureExporter(instrumentation_key='70c241c9-206e-4811-82b4-2bc8a52170b9')
-# sampler=ProbabilitySampler(1.0)
 middleware = FlaskMiddleware(application)
 
 @application.route("/")
