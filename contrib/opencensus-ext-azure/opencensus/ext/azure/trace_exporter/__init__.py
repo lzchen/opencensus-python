@@ -125,6 +125,8 @@ class AzureExporter(TransportMixin, BaseExporter):
 
     def emit(self, batch, event=None):
         try:
+            print("emit")
+            print(batch)
             if batch:
                 envelopes = [self.span_data_to_envelope(sd) for sd in batch]
                 result = self._transmit(envelopes)
