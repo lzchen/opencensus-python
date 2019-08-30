@@ -103,7 +103,6 @@ class FlaskMiddleware(object):
                 print_exporter.PrintExporter()
             if isinstance(self.exporter, six.string_types):
                 self.exporter = configuration.load(self.exporter)
-        print(self.exporter)
 
         if self.propagator is None:
             self.propagator = settings.get('PROPAGATOR', None) or \
