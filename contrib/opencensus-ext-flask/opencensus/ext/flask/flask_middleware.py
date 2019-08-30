@@ -133,7 +133,6 @@ class FlaskMiddleware(object):
             return
 
         try:
-            print("before")
             span_context = self.propagator.from_headers(flask.request.headers)
 
             tracer = tracer_module.Tracer(

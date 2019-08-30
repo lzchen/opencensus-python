@@ -52,7 +52,6 @@ class BaseExporter(object):
     # queue, or shared workers among queues (e.g. queue for traces, queue
     # for logs).
     def export(self, items):
-        print(items)
         self._queue.puts(items, block=False)  # pragma: NO COVER
 
 
