@@ -17,7 +17,7 @@ middleware = FlaskMiddleware(application)
 
 @application.route("/")
 def hello():
-    logger.warning("Hello World!")
+    logger.warning("Testing!")
     return "<h1 style='color:blue'>Hello There!</h1>"
 
 if __name__ == "__main__":
