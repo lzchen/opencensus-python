@@ -37,9 +37,20 @@ from app import routes  # noqa isort:skip
 # Trace integrations for sqlalchemy library
 config_integration.trace_integrations(['sqlalchemy'])
 
+# Trace integrations for requests library
+config_integration.trace_integrations(['requests'])
+
 # FlaskMiddleware will track requests for the Flask application and send
 # request/dependency telemetry to Azure Monitor
 middleware = FlaskMiddleware(app)
+
+# Processor function for changing the role name of the app
+def callback_function(envelope):
+    envelope.tags['ai.cloud.role'] = "To-Do App"
+    return True
+
+# Adds the telemetry processor to the trace exporter
+middleware.exporter.add_telemetry_processor(callback_function)
 
 # Exporter for metrics, will send metrics data
 exporter = metrics_exporter.new_metrics_exporter(

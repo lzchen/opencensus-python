@@ -12,6 +12,6 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-from app import app  # noqa: F401
+from endpoint import endpoint_app  # noqa: F401
 
-app.run(host='localhost', port=5000, threaded=True)
+endpoint_app.run(host='localhost', port=5001, threaded=True)

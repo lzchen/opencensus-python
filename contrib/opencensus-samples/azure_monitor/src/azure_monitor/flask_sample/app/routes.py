@@ -52,8 +52,9 @@ def invalid():
 
 @app.route('/valid', methods=['POST'])
 def valid():
-    url = "http://google.com"
+    url = "http://localhost:5001/api/get"
     response = requests.get(url)
+    print(response)
     flash("Valid request to " + url)
     return redirect('/')
 

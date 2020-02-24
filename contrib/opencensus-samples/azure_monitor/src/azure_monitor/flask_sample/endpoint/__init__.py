@@ -11,7 +11,15 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
+import sys
+from flask import Flask
 
-from app import app  # noqa: F401
+sys.path.append('..')
+endpoint_app = Flask(__name__)
 
-app.run(host='localhost', port=5000, threaded=True)
+# Import here to avoid circular imports
+from endpoint import endpoint_routes  # noqa isort:skip
+
+
+if __name__ == '__main__':
+    endpoint_app.run(host='localhost', port=5001, threaded=True, debug=True)
