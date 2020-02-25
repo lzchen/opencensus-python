@@ -100,7 +100,6 @@ def complete(id):
 @app.route('/get/incomplete')
 def get_incomplete():
     incomplete = Todo.query.filter_by(complete=False).all()
-    print(incomplete)
     return json.dumps([(task.id, task.text) for task in incomplete])
 
 
