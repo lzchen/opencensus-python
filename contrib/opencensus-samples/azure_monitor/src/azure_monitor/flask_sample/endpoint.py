@@ -14,4 +14,4 @@
 
 from endpoint import endpoint_app  # noqa: F401
 
-endpoint_app.run(host='localhost', port=5001, threaded=True)
+endpoint_app.run(host='localhost', port=5001, threaded=True, debug=True)

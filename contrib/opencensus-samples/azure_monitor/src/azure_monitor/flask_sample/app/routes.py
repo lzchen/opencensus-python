@@ -11,6 +11,7 @@
 # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 # See the License for the specific language governing permissions and
 # limitations under the License.
+import json
 import requests
 
 from flask import flash, redirect, render_template, request, url_for
@@ -42,20 +43,20 @@ def index():
     )
 
 
-@app.route('/invalid', methods=['POST'])
-def invalid():
-    url = "http://localhost:8000"
-    response = requests.get(url)
-    flash("ERROR: Invalid request to " + url)
-    return redirect('/')
-
-
-@app.route('/valid', methods=['POST'])
-def valid():
-    url = "http://localhost:5001/api/get"
-    response = requests.get(url)
-    print(response)
-    flash("Valid request to " + url)
+@app.route('/save', methods=['POST'])
+def save():
+    incomplete = Todo.query.filter_by(complete=False).all()
+    complete = Todo.query.filter_by(complete=True).all()
+    incomplete.extend(complete)
+    url = "http://localhost:5001/api/save"
+    entries = ["Id: " + str(entry.id) + " Task: " + entry.text + " Complete: " + str(entry.complete) \
+        for entry in incomplete]
+    response = requests.post(url=url, data=json.dumps(entries))
+    if response.ok:
+        flash("Todo saved to file.")
+    else:
+        logger.error(response.reason)
+        flash("Exception occurred while saving")
     return redirect('/')
 
 

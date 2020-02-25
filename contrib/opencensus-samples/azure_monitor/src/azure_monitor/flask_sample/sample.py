@@ -14,4 +14,4 @@
 
 from app import app  # noqa: F401
 
-app.run(host='localhost', port=5000, threaded=True)
+app.run(host='localhost', port=5000, threaded=True, debug=True)
