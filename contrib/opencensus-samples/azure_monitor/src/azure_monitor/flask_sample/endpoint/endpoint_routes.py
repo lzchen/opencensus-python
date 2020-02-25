@@ -11,7 +11,7 @@ logger = logging.getLogger(__name__)
 def save_tasks():
     try:
         data = json.loads(request.data)
-        with open('/output/file.txt', 'w') as file:
+        with open('./output/file.txt', 'w') as file:
             for item in data:
                 file.write(item)
                 file.write('\n')
