@@ -39,6 +39,7 @@ def get_log_attrs():
         tracer = execution_context.get_opencensus_tracer()
         if tracer is None:
             raise RuntimeError
+        print("got tracer")
     except Exception:  # noqa
         _meta_logger.error("Failed to get opencensus tracer")
         return ATTR_DEFAULTS
@@ -47,6 +48,7 @@ def get_log_attrs():
         trace_id = tracer.span_context.trace_id
         if trace_id is None:
             trace_id = ATTR_DEFAULTS.trace_id
+        print("got trace id: " + str(trace_id))
     except Exception:  # noqa
         _meta_logger.error("Failed to get opencensus trace ID")
         trace_id = ATTR_DEFAULTS.trace_id
@@ -54,7 +56,9 @@ def get_log_attrs():
     try:
         span_id = tracer.span_context.span_id
         if span_id is None:
+            print("span_id is none")
             span_id = ATTR_DEFAULTS.span_id
+        print("got span id: " + str(span_id))
     except Exception:  # noqa
         _meta_logger.error("Failed to get opencensus span ID")
         span_id = ATTR_DEFAULTS.span_id

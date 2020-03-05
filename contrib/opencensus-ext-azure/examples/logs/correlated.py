@@ -13,7 +13,7 @@
 # limitations under the License.
 
 import logging
-
+import time
 from opencensus.ext.azure.log_exporter import AzureLogHandler
 from opencensus.ext.azure.trace_exporter import AzureExporter
 from opencensus.trace import config_integration
@@ -30,9 +30,14 @@ logger = logging.getLogger(__name__)
 handler = AzureLogHandler()
 logger.addHandler(handler)
 
+logger.warning('Before the Tracer')
+
 tracer = Tracer(exporter=AzureExporter(), sampler=ProbabilitySampler(1.0))
 
 logger.warning('Before the span')
 with tracer.span(name='test'):
     logger.warning('In the span')
+    with tracer.span(name='test2'):
+        logger.warning('In the span2')
 logger.warning('After the span')
+time.sleep(100)
